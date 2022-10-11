@@ -7,14 +7,14 @@ import Nav from 'react-bootstrap/Nav';
 const Toolbar = () => {
 
   return (
-    <Navbar bg="primary" variant="dark" style={{ position: 'fixed', width: '100%', zIndex: '3000' }}>
+    <Navbar bg="success" variant="dark" style={{ position: 'fixed', width: '100%', zIndex: '3000' }}>
       <Navbar.Brand href="/">Calculador puntaje crediticio</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/">Home</Nav.Link>
       </Nav>
-      <Form inline>
+      {/* <Form inline>
         <Button variant="outline-light">Logout</Button>
-      </Form>
+      </Form> */}
     </Navbar>
   );
 }

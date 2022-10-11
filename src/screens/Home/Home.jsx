@@ -1,22 +1,18 @@
+import _ from 'lodash';
+
 import React, { useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-
-
-
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
-import './Home.css';
-
 import { DICT_FIELDS } from './helper';
 
+import Field from '../../componentes/Field/Field';
 import Toolbar from '../../componentes/Toolbar/Toolbar';
 
 const Home = (props) => {
@@ -29,42 +25,26 @@ const Home = (props) => {
 
   console.log(form);
 
+
   return (
     <div>
       <Toolbar history={props.history} />
       <Container fluid style={{ position: 'absolute', top: '10%' }}>
-        <Row className="justify-content-xs-center">
+        <Row className="p-3">
+          {
+            DICT_FIELDS.map(item => (
+              <Col key={item?.field} md={4}>
+                <Field
+                  handleChange={e => setForm({ ...form, [item?.field]: e.target.value })}
+                  item={item}
+                  value={!_.isNil(form[item?.field]) ? form[item?.field] : ''}
+                />
+              </Col>
+            ))
+          }
+        </Row>
+        <Row>
           <Col xs={12}>
-            <Form.Row>
-              {
-                DICT_FIELDS.map(item => (
-                  <Form.Group key={item?.field} as={Col} md="4" controlId="validationCustomUsername">
-                    <Form.Label>{item?.placeholder}</Form.Label>
-                    <InputGroup>
-                      {
-                        item?.inputGroupPrepend && (
-                          <InputGroup.Prepend>
-                            <InputGroup.Text id="inputGroupPrepend">{item?.inputGroupPrepend}</InputGroup.Text>
-                          </InputGroup.Prepend>
-                        )
-                      }
-                      <Form.Control
-                        type={item?.type}
-                        placeholder={item?.placeholder}
-                        aria-describedby="inputGroupPrepend"
-                        required
-                        value={form[item?.field]}
-                        name={item?.field}
-                        onChange={e => setForm({ ...form, [item?.field]: e.target.value })}
-                      />
-                      <Form.Control.Feedback type="invalid">
-                        Por favor diligencie el campo
-                      </Form.Control.Feedback>
-                    </InputGroup>
-                  </Form.Group>
-                ))
-              }
-            </Form.Row>
             <Button variant="primary" onClick={handleSubmit}>Calcular</Button>
             &nbsp;
             <Button variant="danger" onClick={clearForm}>Limpiar</Button>

@@ -30,7 +30,7 @@ const NotFound = (props) => {
 
       <Row>
         <Col xs={12} style={{ textAlign: 'center' }}>
-          <Button variant="info" href="/">
+          <Button variant="success" href="/">
             Ir al inicio
           </Button>
         </Col>
