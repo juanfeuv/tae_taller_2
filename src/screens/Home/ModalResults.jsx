@@ -36,14 +36,14 @@ const ModalResults = ({ form, show, onHide }) => {
                   gauge: {
                     axis: {
                       visible: true,
-                      range: [300, 850],
+                      range: [450, 973],
                     },
                     bar: { color: "gray" },
                     steps: [
-                      { range: [300, 629], color: "red" },
-                      { range: [630, 689], color: "yellow" },
-                      { range: [690, 719], color: "#4DE383" },
-                      { range: [720, 850], color: "green" },
+                      { range: [450, 600], color: "red" },
+                      { range: [601, 700], color: "yellow" },
+                      { range: [701, 800], color: "#4DE383" },
+                      { range: [801, 973], color: "green" },
                     ],
                   },
                 }
@@ -69,25 +69,19 @@ const ModalResults = ({ form, show, onHide }) => {
               <Accordion.Item eventKey="0">
                 <Accordion.Header>Percentil</Accordion.Header>
                 <Accordion.Body>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                  minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum.
+                  <h1>El cliente se encuentra sobre el {chart?.percentil}% de la población</h1>
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>Recomendaciones</Accordion.Header>
                 <Accordion.Body>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                  minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in
-                  reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum.
+                  Descripción por color
+                  <ul>
+                    <li><b>Rojo: </b> descripción del rojo</li>
+                    <li><b>Amarillo: </b> descripción del amarillo</li>
+                    <li><b>Verde claro: </b> descripción del Verde claro</li>
+                    <li><b>Verde: </b> descripción del Verde</li>
+                  </ul>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

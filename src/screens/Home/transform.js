@@ -15,10 +15,10 @@ const calculatedFields = ({
 
   return {
     ...input,
-    dti: _.isFinite(dti) ? dti : 0,
-    mths_since_last_credit_pull_d: getMonthsToNow(mths_since_last_credit_pull_d),
-    mths_since_issue_d: getMonthsToNow(mths_since_issue_d),
-    mths_since_earliest_cr_line: getMonthsToNow(mths_since_earliest_cr_line),
+    dti: _.isFinite(dti) ? _.round(dti, 1) : 0,
+    mths_since_last_credit_pull_d: _.round(getMonthsToNow(mths_since_last_credit_pull_d), 0),
+    mths_since_issue_d: _.round(getMonthsToNow(mths_since_issue_d), 0),
+    mths_since_earliest_cr_line: _.round(getMonthsToNow(mths_since_earliest_cr_line), 0),
   };
 };
 
