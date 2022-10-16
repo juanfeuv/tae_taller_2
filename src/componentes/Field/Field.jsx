@@ -33,7 +33,13 @@ const Field = ({ value, handleChange, item }) => {
         {
           item?.type === 'select'
             ? (
-              <Form.Select style={{ width: '90%', }}>
+              <Form.Select
+                style={{ width: '90%', }}
+                required
+                value={value}
+                name={item?.field}
+                onChange={handleChange}
+              >
                 {
                   item?.options?.map(element => (
                     <option key={element?.value} value={element?.value}>{element?.label}</option>

@@ -14,17 +14,26 @@ import { DICT_FIELDS } from './helper';
 
 import Field from '../../componentes/Field/Field';
 import Toolbar from '../../componentes/Toolbar/Toolbar';
+import ModalResults from './ModalResults';
+
+const DEFAULT_FORM = {
+  verification_status: 'NOT_VERIFIED',
+  purpose: 'CAR',
+  grade: 'A',
+  home_ownership: 'MORTGAGE',
+};
 
 const Home = (props) => {
-  const [form, setForm] = useState({});
+  const [form, setForm] = useState(DEFAULT_FORM);
+  const [modalShow, setModalShow] = useState(false);
 
-  const handleSubmit = () => { };
-  const clearForm = () => {
-    setForm({});
+  const handleSubmit = () => {
+    setModalShow(true);
   };
 
-  console.log(form);
-
+  const clearForm = () => {
+    setForm(DEFAULT_FORM);
+  };
 
   return (
     <div>
@@ -51,6 +60,11 @@ const Home = (props) => {
           </Col>
         </Row>
       </Container>
+      <ModalResults
+        show={modalShow}
+        form={form}
+        onHide={() => setModalShow(false)}
+      />
     </div>
   );
 }

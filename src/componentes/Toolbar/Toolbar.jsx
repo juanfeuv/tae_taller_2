@@ -7,7 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 const Toolbar = () => {
 
   return (
-    <Navbar bg="success" variant="dark" style={{ position: 'fixed', width: '100%', zIndex: '3000' }}>
+    <Navbar bg="success" variant="dark" style={{ position: 'fixed', width: '100%', zIndex: '1000' }}>
       <Navbar.Brand href="/">Calculador puntaje crediticio</Navbar.Brand>
       <Nav className="mr-auto">
         <Nav.Link href="/">Home</Nav.Link>
