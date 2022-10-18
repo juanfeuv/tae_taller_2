@@ -5,3 +5,13 @@
 video promocional: https://youtu.be/CgvnH3ToEhM
 
 # tae_taller_2
+
+Jonathan urrego Zea
+
+Juan Felipe Usuga Villegas
+
+Johan Sebastián Cano garcía
+
+Julián David Ruiz Herrera
+
+Raúl Vladimir Gaitán Vaca
