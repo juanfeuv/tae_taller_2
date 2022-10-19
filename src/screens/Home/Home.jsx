@@ -1,27 +1,19 @@
 import _ from 'lodash';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Row from 'react-bootstrap/Row';
+import Tooltip from 'react-bootstrap/Tooltip';
 
-import { DICT_FIELDS } from './helper';
+import { DICT_FIELDS, DEFAULT_FORM, isDisabledCalculate } from './helper';
 
 import Field from '../../componentes/Field/Field';
 import Toolbar from '../../componentes/Toolbar/Toolbar';
 import ModalResults from './ModalResults';
-
-const DEFAULT_FORM = {
-  verification_status: 'NOT_VERIFIED',
-  purpose: 'CAR',
-  grade: 'A',
-  home_ownership: 'MORTGAGE',
-};
 
 const Home = (props) => {
   const [form, setForm] = useState(DEFAULT_FORM);
@@ -34,6 +26,8 @@ const Home = (props) => {
   const clearForm = () => {
     setForm(DEFAULT_FORM);
   };
+
+  const disabledCalculate = useMemo(() => isDisabledCalculate(form), [form]);
 
   return (
     <div>
@@ -54,9 +48,36 @@ const Home = (props) => {
         </Row>
         <Row>
           <Col xs={12}>
-            <Button variant="primary" onClick={handleSubmit}>Calcular</Button>
+            {
+              disabledCalculate
+                ? (
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={<Tooltip>Por favor diligencie todos los campos</Tooltip>}
+                  >
+                    <Button
+                      variant="primary"
+                    >
+                      Calcular
+                    </Button>
+                  </OverlayTrigger>
+                )
+                : (
+                  <Button
+                    variant="primary"
+                    onClick={handleSubmit}
+                  >
+                    Calcular
+                  </Button>
+                )
+            }
             &nbsp;
-            <Button variant="danger" onClick={clearForm}>Limpiar</Button>
+            <Button
+              variant="danger"
+              onClick={clearForm}
+            >
+              Limpiar
+            </Button>
           </Col>
         </Row>
       </Container>

@@ -12,7 +12,7 @@ const Field = ({ value, handleChange, item }) => {
   return (
     <Form.Group as={div} md="12" controlId={item?.field}>
       <Form.Label>
-        {item?.lectura}
+        {item?.lectura}*
         &nbsp;
         <OverlayTrigger
           placement="bottom-end"

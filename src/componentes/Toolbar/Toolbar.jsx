@@ -10,7 +10,7 @@ const Toolbar = () => {
     <Navbar bg="success" variant="dark" style={{ position: 'fixed', width: '100%', zIndex: '1000' }}>
       <Navbar.Brand href="/">Calculador puntaje crediticio</Navbar.Brand>
       <Nav className="mr-auto">
-        <Nav.Link href="/">Home</Nav.Link>
+        {/* <Nav.Link href="/">Home</Nav.Link> */}
       </Nav>
       {/* <Form inline>
         <Button variant="outline-light">Logout</Button>

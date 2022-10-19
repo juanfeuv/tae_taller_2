@@ -1,4 +1,4 @@
-import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Plot from 'react-plotly.js';
@@ -14,7 +14,6 @@ const ModalResults = ({ form, show, onHide }) => {
   useEffect(() => {
     if (show) {
       const res = calculateScore(form);
-      console.log(res);
       setChart(res);
     }
   }, [show]);
@@ -25,9 +24,9 @@ const ModalResults = ({ form, show, onHide }) => {
       show={show}
       onHide={onHide}
     >
-      <Container fluid >
+      <Container fluid>
         <Row className="p-2">
-          <Col xs={12} md={6}>
+          <Col xs={12}>
             <Plot
               data={[
                 {
@@ -50,12 +49,11 @@ const ModalResults = ({ form, show, onHide }) => {
               ]}
               layout={{
                 margin: { t: 50, b: 50, l: 50, r: 50 },
-                grid: { rows: 2, columns: 2, pattern: "independent" },
                 template: {
                   data: {
                     indicator: [
                       {
-                        title: { text: "Puntaje" },
+                        title: { text: "Score" },
                         mode: "number+delta+gauge",
                       }
                     ]
@@ -64,27 +62,27 @@ const ModalResults = ({ form, show, onHide }) => {
               }}
             />
           </Col>
+        </Row>
+        <Row className="p-2">
           <Col xs={12} md={6}>
-            <Accordion defaultActiveKey="0">
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>Percentil</Accordion.Header>
-                <Accordion.Body>
-                  <h1>El cliente se encuentra sobre el {chart?.percentil}% de la población</h1>
-                </Accordion.Body>
-              </Accordion.Item>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header>Recomendaciones</Accordion.Header>
-                <Accordion.Body>
-                  Descripción por color
-                  <ul>
-                    <li><b>Rojo: </b> descripción del rojo</li>
-                    <li><b>Amarillo: </b> descripción del amarillo</li>
-                    <li><b>Verde claro: </b> descripción del Verde claro</li>
-                    <li><b>Verde: </b> descripción del Verde</li>
-                  </ul>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <Card border="primary" style={{ width: '18rem' }}>
+              <Card.Header><b>Percentil</b></Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  El cliente se encuentra sobre el {chart?.percentil}% de la población
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col xs={12} md={6}>
+            <Card border="primary" style={{ width: '18rem' }}>
+              <Card.Header><b>Recomendaciones</b></Card.Header>
+              <Card.Body>
+                <Card.Text>
+                  {chart?.recomendacion}
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>

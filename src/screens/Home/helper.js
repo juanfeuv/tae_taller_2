@@ -1,9 +1,20 @@
+import _ from 'lodash';
+
 import moment from 'moment';
 import React from 'react';
 
-import { FaDollarSign, FaCalendarAlt, FaBusinessTime, FaPercent, FaHouseUser, FaClock, FaCheckCircle, FaHandshake, FaScroll } from "react-icons/fa";
+import {
+  FaDollarSign, FaCalendarAlt, FaBusinessTime, FaPercent, FaHouseUser, FaCheckCircle, FaHandshake, FaScroll, FaDivide, FaMoneyBillAlt
+} from "react-icons/fa";
 
 const currentDate = moment().format('YYYY-MM-DD');
+
+export const DEFAULT_FORM = {
+  verification_status: 'NOT_VERIFIED',
+  purpose: 'CAR',
+  grade: 'A',
+  home_ownership: 'MORTGAGE',
+};
 
 export const DICT_FIELDS = [
   {
@@ -206,7 +217,7 @@ export const DICT_FIELDS = [
     lectura: 'Cantidad estudios crediticios',
     type: 'number',
     min: 0,
-    inputGroupPrepend: '#',
+    inputGroupPrepend: <FaMoneyBillAlt />,
   },
   {
     field: 'revol_util',
@@ -214,6 +225,7 @@ export const DICT_FIELDS = [
     lectura: 'Razón crédito rotativo utilizado vs total',
     type: 'number',
     min: 0,
+    inputGroupPrepend: <FaDivide />,
   },
   // {
   //   field: 'total_acc',
@@ -367,4 +379,12 @@ export const MATRIZ_COHEFICIENTES = {
   "verification_status:Not Verified": 0,
   "home_ownership:MORTGAGE": 0,
   "grade:G": 0
+};
+
+export const isDisabledCalculate = (form) => {
+  const newForm = DICT_FIELDS.reduce((accum, item) => ({ ...accum, [item.field]: undefined }), {});
+
+  _.assign(newForm, form);
+
+  return _.some(newForm, (item) => _.isNil(item) || _.isEmpty(item));
 };

@@ -23,11 +23,7 @@ const calculatedFields = ({
 };
 
 const transform = (input) => {
-  console.log(input);
   const X = calculatedFields(input);
-
-  console.log(X);
-
   const X_new = {};
 
   X_new['Intercept'] = 1;
