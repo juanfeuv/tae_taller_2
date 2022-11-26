@@ -28,6 +28,7 @@ Como primer vistazo de los datos se puede ver que hay variables con más de 80% 
 ### 2.2. Variable objetivo
 
 Se selecciona la variable loan\_status como variable objetivo dado que describe claramente si se ha cumplido adecuadamente con las obligaciones crediticias o no; podemos convencernos de esto viendo los estados posibles y sus proporciones tal como se indica en la tabla[ 1.]
+
 ![image](https://user-images.githubusercontent.com/45887686/204109006-a1c2e8d7-82c6-4ec2-8b38-50e723dc215e.png)
 
 En ese sentido se van a clasificarlos siguientes estados como estados por defecto y se les asigna el número 0:
