@@ -21,11 +21,11 @@ Se dará un enfoque general y no se tratarán en detalle todos los métodos util
 
 Utilizamos un [conjunto de datos ](https://drive.google.com/file/d/166vL6y2JgEF1L7ys7JoeAEIxSBcUj26H/view?usp=sharing)disponible en Kaggle que contiene información sobre más de 450,000 créditos otorgados por Lending Club entre 2007 y 2014, este incluye información sobre el estado actual del crédito y sobre el deudor y su comportamiento. En el [diccionario de datos ](https://github.com/finlytics-hub/credit_risk_model/blob/master/Data%20Dictionary.xlsx)se puede encontrar más información sobre cada una de las variables del conjunto de datos.
 
-## 2.1. Exploración inicial de los datos
+### 2.1. Exploración inicial de los datos
 
 Como primer vistazo de los datos se puede ver que hay variables con más de 80% de valores faltantes y por tanto cualquier método de imputación probablemente resulte en resultados desacertados. Además existen variables que no están relacionadas al riesgo crediticio o que no aportan nada al modelo y por tanto se eliminan.
 
-## 2.2. Variable objetivo
+### 2.2. Variable objetivo
 
 Se selecciona la variable loan\_status como variable objetivo dado que describe claramente si se ha cumplido adecuadamente con las obligaciones crediticias o no; podemos convencernos de esto viendo los estados posibles y sus proporciones tal como se indica en la tabla[ 1.]
 ![image](https://user-images.githubusercontent.com/45887686/204109006-a1c2e8d7-82c6-4ec2-8b38-50e723dc215e.png)
@@ -39,13 +39,13 @@ En ese sentido se van a clasificarlos siguientes estados como estados por defect
 
 Todos los demás valores se los clasificacomo buenos y se les asigna el número 1
 
-## 2.3. Datos de entrenamiento y de test
+### 2.3. Datos de entrenamiento y de test
 
 Ahora se divide el conjunto de datos separando un 80% de los datos elegidos aleatoriamente los cuales constituyen el conjunto de entrenamiento y el 20restante constitye el conjunto de test. Además como un test preliminar se utilizará el método de validación cruzada sobre el conjunto de entrenamiento y posteriormente se va a validar el conjunto de test.
 
 Es de notar que los datos están fuertemente sesgados hacia los buenos préstamos y por tanto se va a estratificar la división del conjunto de datos, de manera que el conjunto de test mantenga la distribución del conjunto inicial.
 
-## 2.4. Limpieza de datos
+### 2.4. Limpieza de datos
 
 Con el objetivo de hacer más mánejables los datos para nuestros propósitos se realizan una serie de transformaciones. Para esto definiremosuna función específicapara cada una para usarlas tanto sobre el conjunto de entrenamiento como en el de test, a saber:
 - Se remueve el texto de la columna emp\_length y se convierte en numérica
@@ -70,7 +70,7 @@ Se realiza una verificaciónde colinealidad para identificarposibles varibles co
 
 En la tabla[ 4 ](#_page5_x279.86_y287.62)se pueden ver las variables seleccionadas para desarrollar el modelo.
 
-## 3.1. One-hot-encoding y conjunto de test
+### 3.1. One-hot-encoding y conjunto de test
 
 Un paso adicional que es necesario para el modelo es darle a las variables categóricas un valor numérico; esto se hará mediante one-hot-encoding. Este procedimiendo consiste en asignar a cada variable categórica una serie de variables ficticiasque corresponden a cada una de sus categorías y asignar el valor 1 a la variable ficticiacorrespondiente a la categoría a la que pertenece la obervación y 0 a las demás. La convención que utilizamos para asignar el nombre a cada variable ficticiaes: nombre\_de\_la\_variable:categoria. Este procedimiento junto con todos los anteriores
 
@@ -84,7 +84,7 @@ se hacen tanto para el conjunto de entrenamiento como para el conjunto de test. 
 
 En esta sección se discutirán dos valores que permiten conocer el poder predictivo de una variable, estos son el Peso de evidencia (WoE por sus siglas en inglés) y el valor de la información (IV por sus siglas en inglés); a partir de ahora nos referiremos a ellos como WoE e IV respectivamente. En esta documentación no se va a visualizar y discutir en detalle los valores de WoE e IV de cada variable; el lector puede ver el desarrollo y la visualización de estos en el[ notebook de Google Colab.](https://colab.research.google.com/drive/1cp6mqTkppM9KIdezsJ0OywjuLrwvBhOQ#scrollTo=UN7OGhJeNdQw)
 
-## 4.1. WoE
+### 4.1. WoE
 
 Para calcular el WoE se debe categorizar las variables numéricas de el modelo. Esto es posible separando las variables por bins y asignando una categoría específicapara los valores faltantes; una vez hecho esto se puede conocer el WoE de cada categoría para una variable específicacon la ecuación[ 1.](#_page4_x235.71_y707.14) El WoE nos da información sobre el poder predictivo de cada una de las categorías asociadas a una variable.
 
@@ -92,7 +92,7 @@ Para calcular el WoE se debe categorizar las variables numéricas de el modelo. 
 
 ![image](https://user-images.githubusercontent.com/45887686/204110085-953395fd-ea55-45fa-9753-9b7b08b4e8af.png)
 
-## 4.2. IV
+### 4.2. IV
 
 El IV permite conocer el poder predictivo de la variable a partir del WoE; a diferencia de este último, con el IV podemos concoer el poder predictivo acumulado de todas las categorías de una variable y no solamente el de cada una de ellas. Se calcula mediante la ecuación[ 2]
 
@@ -102,7 +102,7 @@ En la tabla[ 5 ](#_page5_x286.64_y526.84)se puede ver una regla común para clas
 
 ![image](https://user-images.githubusercontent.com/45887686/204110140-bcfd6047-8750-4bf4-b57b-36b0a755af71.png)
 
-## 4.3. Variables finales
+### 4.3. Variables finales
 
 Una vez calculados y visualizados los IV de cada variable unimos algunas de las categorías que obtuvimos para calcular el WoE inicialmente siguiendo estas reglas:
 
@@ -119,7 +119,7 @@ El resultado finaldespués de hacer las transformaciones correpondientes se pued
 
 En esta sección se ajusta un modelo de regresión logística sobre nuestro conjunto de entrenamiento y se usa validación cruzada sobre el mismo como test preliminar.
 
-## 5.1. Entrenamiento del modelo
+### 5.1. Entrenamiento del modelo
 
 En el modelo de regresión logística se define el parámetro class\_weight como balanced con el fin de que el modelo tenga un aprendizaje sensible a los costos, es decir que penalice más los falsos negativos que los falsos positivos.
 
@@ -129,7 +129,7 @@ Se usará además el área bajo una curva ROC como métrica de evaluación. Se u
 
 Una vez que la validación es satisfactoria se ajusta el pipeline al conjunto de entrenamiento completo. En la tabla[ 8 ](#_page8_x273.77_y309.44)se observa una muestra de 20 de los coeficientesque arroja el modelo.
 
-## 5.2. Hora de predecir
+### 5.2. Hora de predecir
 
 Una vez el modelo esté entrenado el siguiente paso es validarlo. Para esto se predice la probabilidad de que se dé un valor positivo en el conjunto de test, esto es, que el valor sea . El resultado se guarda en un dataframe distinto junto con la clase verdadera. En la tabla[ 9 ](#_page8_x281.65_y468.04)se puede observar un ejemplo en 10 observaciones.
 
@@ -141,7 +141,7 @@ Además, se dibujan las curva ROC y PR como se observa en las figuras[2 ](#_page
 
 Además se calcula el área bajo la curva ROC y se obtiene un valor de 0.7172 y el coeficienteGINI y se obtiene un valor de 0.4345.
 
-## 5.3. Desarrollo de la scorecard
+### 5.3. Desarrollo de la scorecard
 
 Para el desarrollo de la scorecard el primer paso es elegir los valores máximos y mínimos que podría tomar el puntaje. Para esto se eligen inicialmente los mismos que utiliza la FICO en Estados Unidos; es decir, el mínimo se toma en 350 y el máximo se toma en 850. Además se junta la tabla que se ilustra mediante la tabla [8 ](#_page8_x273.77_y309.44)con una tabla que contiene el nombre original de cada una de las variables ficticias.Posteriormente se escala cada uno de los coeficientesque retorna la regresión logística al rango que hemos seleccionado al igual que el intercepto, este es el valor inicial que puede tomar un usuario.
 
@@ -149,11 +149,11 @@ Para el desarrollo de la scorecard el primer paso es elegir los valores máximos
 
 ![image](https://user-images.githubusercontent.com/45887686/204110318-5e79b59f-adb0-4d36-9a7c-a6452eb44a13.png)
 
-## 5.4. Calcular los puntajes de conjunto de test
+### 5.4. Calcular los puntajes de conjunto de test
 
 Finalmente para calcular el puntaje de cada observación en el conjunto de test es suficiente con realizar un producto punto entre el vector de observación y la columna de puntajes finales.
 
-## 5.5. Selección del puntaje de corte
+### 5.5. Selección del puntaje de corte
 
 Para seleccionar el mejor puntaje de corte se utiliza el estadístico J de Youden.
 
@@ -169,7 +169,7 @@ Todo este trabajo ha sido con el objetivo de obtener un modelo fácilmente utili
 
 ![image](https://user-images.githubusercontent.com/45887686/204110380-fcbbc62d-c2e7-4c6c-b691-079a2b718519.png)
 
-Referencias
+## Referencias
 
 1. Gareth James • Daniela Witten • Trevor Hastie Robert Tibshirani: An Introduction to Statistical Learning with Apllications in R ..
 1. https://towardsdatascience.com/how-to-develop-a-credit-risk-model-and-scorecard-91335fc01f03
