@@ -17,7 +17,9 @@ const Toolbar = () => {
         {/* <Nav.Link href="/">Home</Nav.Link> */}
       </Nav>
       <Form inline>
-        <Button variant="outline-light" href='https://github.com/juanfeuv/tae_taller_2' target="_blank" rel="noreferrer">Reporte</Button>
+      <Button variant="outline-light" href='https://www.clickgreenapp.com/reporte_2/TAE_2_Final.html' target="_blank" rel="noreferrer">Reporte</Button>
+        &nbsp;
+        <Button variant="outline-light" href='https://github.com/juanfeuv/tae_taller_2' target="_blank" rel="noreferrer">Repositorio</Button>
         &nbsp;
         <Button variant="outline-light" href='https://youtu.be/CgvnH3ToEhM' target="_blank" rel="noreferrer">Video</Button>
         &nbsp;
